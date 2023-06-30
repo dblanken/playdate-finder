@@ -5,7 +5,7 @@ import { api } from "~/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const events = api.example.getAllEvents.useQuery({});
+  const events = api.example.getAllEvents.useQuery();
 
   return (
     <>
