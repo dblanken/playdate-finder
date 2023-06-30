@@ -57,7 +57,7 @@ export default function Home() {
           <p className="text-2xl text-white">
             Here are some events
           </p>
-          <p>
+          <p className="text-white">
             {events.data ? events.data.map((event): string => {
               return event.title
             }) : "Loading events..."}
