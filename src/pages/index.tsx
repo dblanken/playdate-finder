@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const events = api.example.getAllEvents.useQuery({});
 
   return (
     <>
@@ -48,6 +49,16 @@ export default function Home() {
             </p>
             <AuthShowcase />
           </div>
+        </div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-2xl text-white">
+            Here are some events
+          </p>
+          <p>
+            {events.data ? events.data.map((event): string => {
+              return event.title
+            }) : "Loading events..."}
+          </p>
         </div>
       </main>
     </>
