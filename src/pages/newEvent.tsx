@@ -18,11 +18,11 @@ export default function NewEvent() {
                     <fieldset className="bg-neutral-200 current border-8 rounded">
                         <form action="/createEvent" method="post">
                             <div>
-                                <label for="eventTitle">Event title</label>
+                                <label htmlFor="eventTitle">Event title</label>
                                 <input type="text" id="eventTitle" name="eventTitle" />
                             </div>
                             <div>
-                                <label for="eventStartAt">
+                                <label htmlFor="eventStartAt">
                                     Starts at
                                 </label>
                                 <input type="datetime-local" name="eventStartAt" id="eventStartAt" />
