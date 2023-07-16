@@ -33,6 +33,10 @@ export default function NewEvent() {
                                 </label>
                                 <input type="datetime-local" name="eventEndAt" id="eventEndAt" />
                             </div>
+                            <div>
+                                <label htmlFor="eventLocation">Location</label>
+                                <input type="text" name="eventLocation" id="eventLocation" />
+                            </div>
                         </form>
                     </fieldset>
                 </div>
