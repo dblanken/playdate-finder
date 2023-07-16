@@ -69,6 +69,7 @@ model Event {
     start_at      DateTime
     end_at        DateTime
     location      String
+    description   String?
     creatorId     String
     creator       User      @relation(fields: [creatorId], references: [id], onDelete: Cascade)
     created_at    DateTime

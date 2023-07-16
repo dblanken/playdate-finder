@@ -1,9 +1,35 @@
 import Head from "next/head";
-import Link from "next/link";
-import { api } from "~/utils/api";
-import { type Event } from "@prisma/client";
 
 export default function NewEvent() {
+    const handleSubmit = async (event): Promise<void> => {
+        event.preventDefault()
+
+        const data = {
+            title: event.target.eventTitle.value,
+            startsAt: event.target.eventStartAt.value,
+            endsAt: event.target.eventEndAt.value,
+            location: event.target.eventLocation.value,
+            description: event.target.eventDescription.value,
+        }
+
+        const JSONData = JSON.stringify(data)
+
+        const endpoint = '/api/v1/createEvent'
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSONData,
+        }
+
+        const response = await fetch(endpoint, options)
+
+        const result = await response.json()
+        alert(`The title of this is: ${result.data}`)
+    };
+
     return (
         <>
             <Head>
@@ -16,24 +42,31 @@ export default function NewEvent() {
                         Add an <span className="text-[hsl(280,100%,70%)]">Event</span>
                     </h1>
                     <fieldset className="bg-neutral-200 current border-8 rounded">
-                        <form action="/createEvent" method="post">
+                        <form action="/api/v1/createEvent" method="post" onSubmit={handleSubmit}>
                             <div>
                                 <label htmlFor="eventTitle">Event title</label>
-                                <input type="text" id="eventTitle" name="eventTitle" />
+                                <input type="text" id="eventTitle" name="eventTitle" required maxLength={254} minLength={1} />
                             </div>
                             <div>
                                 <label htmlFor="eventStartAt">
                                     Starts at
                                 </label>
-                                <input type="datetime-local" name="eventStartAt" id="eventStartAt" />
+                                <input type="datetime-local" name="eventStartAt" id="eventStartAt" required />
                             </div>
                             <div>
                                 <label htmlFor="eventEndAt">Ends at</label>
-                                <input type="datetime-local" name="eventEndAt" id="eventEndAt" />
+                                <input type="datetime-local" name="eventEndAt" id="eventEndAt" required />
                             </div>
                             <div>
                                 <label htmlFor="eventLocation">Location</label>
-                                <input type="text" name="eventLocation" id="eventLocation" />
+                                <input type="text" name="eventLocation" id="eventLocation" required maxLength={254} />
+                            </div>
+                            <div>
+                                <label htmlFor="eventDescription">Description</label>
+                                <textarea name="eventDescription" id="eventDescription" />
+                            </div>
+                            <div className="flex flex-col actions items-center">
+                                <button type="submit" id="submit" name="submit">Create</button>
                             </div>
                         </form>
                     </fieldset>
